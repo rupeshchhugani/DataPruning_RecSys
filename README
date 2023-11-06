@@ -91,7 +91,7 @@ PLOTTING RESULTS
 visualisation_results - for plotting and comparing all the RMSE and MAE values obtained from all models along with values from Random Pruning
 visualisation_data_time - overview about the number of users pruned which affects the training and prediction time depicted in the table.
 
-Github - https://github.com/ISG-Siegen/SA_Rupeshkumar_Chhugani.git
+Github - https://github.com/rupeshchhugani/DataPruning_RecSys.git
 
 ** Contributions are welcome for new pruning techniques, especially related to Model six(age of the user) and Model seven(filtering out the dummy users)as these models showed significant results **
 
