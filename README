@@ -1,0 +1,107 @@
+DATA PRUNING IN RECOMMENDER SYSTEMS
+
+SUMMARY
+==============================================================================================
+Data Pruning is a concept in recommender systems which refers to the process of deleting unfavorable entities from a dataset to optimize a machine learning model's learning process.
+
+In this project six different pruning techniques are implemented on two different datasets which are discussed below. 
+Datasets used - MovieLens100k and MovieLens 1M
+
+The performance of recommender systems were calculated using RMSE and MAE. Three algorithms were implemented on seven models to calculate RMSE and MAE:
+	1. FunkSVD (https://github.com/gbolmier/funk-svd.git)
+	2. XgBoost
+	3. Random Forest Regressor
+
+IMPORTING LIBRARIES
+==============================================================================================
+
+This project requires Python version 3.9.13 or below. 
+
+Next step is to clone FunkSVD using the command below:
+pip install git+https://github.com/gbolmier/funk-svd
+
+Import numpy, random and pandas
+
+For calculating RMSE and MAE values import sklearn.metrics library
+
+Import SVD from funkSVD
+Import XGBRegressor from xgboost
+Import RandomForestRegressor from sklearn.ensamble
+
+For plotting the graphs use matplotlib
+Lastly, for calculating the training and prediction time import time, timeit
+
+IMPORTING DATA
+==============================================================================================
+Get the data from GroupLens - https://grouplens.org/datasets/movielens/
+
+MovieLens100k contains 1664 movies and 944 users with 100k user ratings.
+MovieLens 1M contains 1,000,209 anonymous ratings of approximately 3,900 movies made by 6,040 MovieLens users.
+(Read More here - The MovieLens Datasets: History and Context, https://dl.acm.org/doi/10.1145/2827872)
+
+SPLITTING DATA FOR TRAIN & TEST
+==============================================================================================
+Using train_test_split from sklearn we can split the data as follows:
+- train set is 90% of the entire dataset
+    - Out of train set, 15% is validation set
+    - Out of train set, 75% is used for actual training
+- test set is 10% of the entire dataset
+
+
+CREATING MODELS
+==============================================================================================
+Seven models were created to find out if data pruning is a best practice or Mal-practice. Three algorithms(FunkSVD, XgBoost, Random Forest Regressor) were used in each model to calculate RMSE and MAE values. To cross-validate the results, Random pruning was performed on each model. 
+
+Abbreviations used:
+M1 - Model one, M2 - Model two, M3 - Model three, M4 - Model four, M5 - Model five, M6 - Model six, M7 - Model seven
+RP - Random Pruning, tt - Training time, pt - Prediction time, n_modelname - number of users pruned from train set, 
+n_v_modelname - number of users pruned from validation set
+
+The flow of the code is as follows:
+M1 - consists of dataset which was entirely unpruned. This is the baseline model against which all the results are compared.
+
+M2 - pruning on the basis of movie ratings 
+	1. Movies with rating less than 2 are pruned. 
+	2. Random Pruning M2 - the number of users pruned in M2 are randomly pruning here.
+	3. Movies with ratings less than 3 are pruned.
+
+M3 - pruning on the basis of user ratings.
+	1. Users who have rated less than 30 movies are pruned.
+	2. Random Pruning M3 - the number of users pruned in M3 are randomly pruning here.
+	3. Users who have rated less than 40 movies are pruned.
+
+M4 - pruning on the basis of timestamp. 
+	1. The movie data from the initial two months are pruned/ For MovieLens 1M - initial four months.
+	2. Random Pruning M4 - the number of users pruned in M4 are randomly pruning here.
+	3. The data for the first three months are pruned/ For MovieLens 1M - initial six months.
+
+M5 - pruning on the basis of occupation. Users whose occupation is 'other' are pruning.
+Random Pruning M5 - the number of users pruned in M5 are randomly pruning here.
+
+M6 - pruning on the basis of user's age. Users whose age is less than 18 were pruned.
+Random Pruning M6 - the number of users pruned in M6 are randomly pruning here.
+
+M7 - pruning to remove the users who have unstable ratings for movies. 
+Mathematical idea is Rating(1 or 5) >= 2 * Rating(Max(2 or 3 or 4)) are pruning
+Random Pruning M7 - the number of users pruned in M7 are randomly pruning here.
+
+
+PLOTTING RESULTS
+==============================================================================================
+visualisation_results - for plotting and comparing all the RMSE and MAE values obtained from all models along with values from Random Pruning
+visualisation_data_time - overview about the number of users pruned which affects the training and prediction time depicted in the table.
+
+Github - https://github.com/ISG-Siegen/SA_Rupeshkumar_Chhugani.git
+
+** Contributions are welcome for new pruning techniques, especially related to Model six(age of the user) and Model seven(filtering out the dummy users)as these models showed significant results **
+
+
+
+
+
+
+
+
+
+
+
